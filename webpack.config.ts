@@ -18,7 +18,7 @@ const webpackConfig = (env): Configuration => ({
     },
   },
   output: {
-    publicPath: './',
+    publicPath: 'auto',
     path: path.join(__dirname, 'dist'),
     filename: 'build.js',
   },
@@ -29,8 +29,13 @@ const webpackConfig = (env): Configuration => ({
       {
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
-        use: ['babel-loader', 'eslint-loader'],
+        use: ['ts-loader', 'eslint-loader'],
       },
+      {
+        test: /\.(ttf|woff|woff2|eot)$/,
+        use: ['file-loader'],
+      },
+
       {
         test: /\.(sa|sc|c)ss$/,
         use: [

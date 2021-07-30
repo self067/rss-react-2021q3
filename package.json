@@ -10,7 +10,7 @@
   "license": "ISC",
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack serve --mode development --open --progress --content-base './dist'",
+    "start": "cross-env NODE_ENV=development webpack serve --mode development --open --progress ",
     "dev": "cross-env NODE_ENV=development webpack --mode development --progress",
     "build": "cross-env NODE_ENV=production webpack --mode production --progress",
     "lint": "eslint --fix . --ext .ts,.tsx src",
