@@ -1,92 +1,141 @@
-import path from 'path';
-import webpack, { Configuration } from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import ESLintWebpackPlugin from 'eslint-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+const path = require('path');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-// import CopyPlugin from 'copy-webpack-plugin';
+const isDev = process.env.NODE_ENV === 'development';
 
-const webpackConfig = (env): Configuration => ({
-  entry: './src/index.tsx',
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
-    alias: {
-      assets: path.resolve(__dirname, './src/assets/'),
-      components: path.resolve(__dirname, './src/components/'),
+const cssLoaders = extr => {
+  const loaders = [
+    {
+      loader: MiniCssExtractPlugin.loader,
+      options: {},
     },
+    'css-loader',
+  ];
+  if (extr !== '') loaders.push(extr);
+  return loaders;
+};
+
+const babelOptions = preset => {
+  const opts = {
+    presets: ['@babel/preset-env'],
+  };
+  if (preset) {
+    if (Array.isArray(preset)) opts.presets.push(...preset);
+    else opts.presets.push(preset);
+  }
+
+  return opts;
+};
+
+// const jsLoaders = () => {
+//   const loaders = {
+//     loader: ["babel-loader"],
+//     options: babelOptions()
+//   };
+//   if( isDev) {
+//     loaders.loader.push('eslint-loader');
+//   }
+//   return loaders;
+// }
+
+const plugins = () => {
+  const base = [
+    new HTMLWebpackPlugin({
+      template: './index.html',
+      minify: !isDev,
+    }),
+    new CleanWebpackPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'src/favicon.ico'),
+          to: path.resolve(__dirname, 'dist'),
+        },
+      ],
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+    }),
+  ];
+  // if( !isDev) base.push( new WebpackBundleAnalyzer())
+  return base;
+};
+
+module.exports = {
+  context: path.resolve(__dirname, 'src'),
+  // mode: 'development',
+  entry: {
+    main: ['@babel/polyfill', './index.tsx'],
+    // analytics: './analytics.ts',
   },
   output: {
-    publicPath: 'auto',
-    path: path.join(__dirname, 'dist'),
-    filename: 'build.js',
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].[contenthash].js',
   },
+
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', 'jsx', '.png', '.jpg'],
+    alias: {
+      'components': path.resolve(__dirname, './src/components'),
+      //     '@': path.resolve(__dirname, 'src'),
+    },
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+    minimizer: ['...', new CssMinimizerPlugin()],
+  },
+
   devtool: 'source-map',
+
+  // devServer: {
+  //   port: 4200,
+  //   hot: isDev
+  // },
+  plugins: plugins(),
   module: {
     rules: [
-      { enforce: 'pre', test: /\.(ts|js)x?$/, loader: 'eslint-loader' },
       {
-        test: /\.(ts|js)x?$/,
-        exclude: /node_modules/,
-        use: ['ts-loader', 'eslint-loader'],
+        test: /\.css$/,
+        use: cssLoaders(''),
+      },
+      {
+        test: /\.s[ac]ss$/,
+        use: cssLoaders('sass-loader'),
+      },
+      {
+        test: /\.(png|jpg|svg|gif)$/,
+        type: 'asset/resource',
       },
       {
         test: /\.(ttf|woff|woff2|eot)$/,
-        use: ['file-loader'],
+        type: 'asset/resource',
+        // use: ['file-loader'],
       },
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
 
-      {
-        test: /\.(sa|sc|c)ss$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: './public',
-              // minimize: true,
-            },
-          },
-          { loader: 'css-loader' },
-          { loader: 'sass-loader' },
-        ],
+        use: 'ts-loader',
+
+        // use: {
+        //   loader: 'babel-loader',
+        //   options: babelOptions('@babel/preset-typescript'),
+        // },
       },
       {
-        test: /\.(png|jpg|gif)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: { limit: 8192 },
-          },
-        ],
+        test: /\.tsx$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: babelOptions(['@babel/preset-typescript', '@babel/preset-react']),
+        },
       },
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './public/index.html',
-    }),
-    new ForkTsCheckerWebpackPlugin({
-      eslint: {
-        files: './src/**/*.{ts,tsx,js,jsx}',
-      },
-    }),
-    new MiniCssExtractPlugin({
-      filename: 'style.css',
-    }),
-    // new CopyPlugin({
-    //   patterns: [
-    //     { from: './public/assets', to: path.resolve(__dirname, 'dist') },
-    //     { from: path.resolve(__dirname, 'src/favicon.ico'), to: path.resolve(__dirname, 'dist') },
-    //   ],
-    // }),
-    new ESLintWebpackPlugin({
-      failOnError: true,
-      failOnWarning: true,
-    }),
-  ],
-  optimization: {
-    minimizer: ['...', new CssMinimizerPlugin()],
-  },
-});
-
-export default webpackConfig;
+};

@@ -1,3 +1,4 @@
 webpack.config.ts
+.eslintrc.ts 
 /dist
 /node_modules
