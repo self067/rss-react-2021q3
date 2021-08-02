@@ -8,7 +8,7 @@ export const SearchWrap = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  background-color: #13cccc;
+  background-color: #16cc13d9;
   font-size: 2rem;
 `;
 
