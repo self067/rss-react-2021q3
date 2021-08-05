@@ -2,7 +2,7 @@ import React from 'react';
 import { CardWrap, CardImage, CardDescription, CardInfo } from './styled';
 
 interface ICard {
-  id: number;
+  // id: number;
   name: string;
   image: string;
   species: string;
@@ -10,8 +10,7 @@ interface ICard {
   country: string;
 }
 
-const Card: FC = ({ item }) => {
-  const { id, description, image, species, name, country }: ICard = item;
+const Card: React.FC<ICard> = ({ description, image, species, name, country }: ICard) => {
   const im = `public/images/${image}`;
   return (
     <CardWrap>

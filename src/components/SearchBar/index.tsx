@@ -1,9 +1,8 @@
 import React from 'react';
-import magn from 'assets/images/magnifier.svg';
 
 import { SearchWrap, SearchInput, SearchButton } from './styled';
 
-const SearchBar = () => (
+const SearchBar: React.FC = () => (
   <SearchWrap>
     <SearchInput placeholder="Search" />
     <SearchButton />

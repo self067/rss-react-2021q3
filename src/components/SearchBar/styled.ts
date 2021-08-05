@@ -30,5 +30,6 @@ export const SearchButton = styled.button`
   &:hover {
     transform: scale(1.1);
     fill: rebeccapurple;
+    cursor: pointer;
   }
 `;
