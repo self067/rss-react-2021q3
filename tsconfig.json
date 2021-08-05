@@ -11,7 +11,7 @@
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
-    "allowJs": true,
+    "allowJs": false,
     "baseUrl": "./",
     "esModuleInterop": true,
     "resolveJsonModule": true,
@@ -19,9 +19,10 @@
     "downlevelIteration": true,
     "paths": {
       "components/*": ["./src/components/*"],
-      "assets/*": ["./src/assets"],
+      "assets/*": ["./src/assets/*"],
       "store/*": ["./src/store/*"]
     }
+    // "typeRoots": ["./src/@types", "./node_modules/@types"]
   },
-  "include": ["src/**/*"]
+  "include": ["src"]
 }
