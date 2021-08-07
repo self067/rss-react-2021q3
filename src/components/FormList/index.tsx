@@ -1,19 +1,20 @@
 import React from 'react';
-import Form from 'components/Form';
-// import FormsWrap from './styled';
 
-// const FormList: React.FC = ({ data }) => {
-const FormList: React.FC = () => {
-  // const forms = data;
-  console.log('data');
+import { FormsWrapper, FormCard, FormItem } from './styled';
 
-  return (
-    <>
-      {/* {ani.map(a => (
-        <Form key={a.id}  item={a} />
-      ))} */}
-    </>
-  );
-};
+const FormList: React.FC<IForms> = ({ forms }: IForms) => (
+  <FormsWrapper>
+    {forms.map((f: IForm) => (
+      <FormCard key={f.id}>
+        <FormItem>Name: {f.firstName}</FormItem>
+        <FormItem>EMail: {f.email}</FormItem>
+        <FormItem>Birth Date: {f.birthDate}</FormItem>
+        <FormItem>Country: {f.country}</FormItem>
+        <FormItem>Communic: {f.communic}</FormItem>
+        <FormItem>Drinks: {f.drinks.map(i => `${i} `)}</FormItem>
+      </FormCard>
+    ))}
+  </FormsWrapper>
+);
 
 export default FormList;

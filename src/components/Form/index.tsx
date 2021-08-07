@@ -4,15 +4,8 @@ import InputRadio from 'components/InputRadio';
 import InputCheckBox from 'components/InputCheckBox';
 import InputSelect from 'components/InputSelect';
 import ValidateStatus from 'components/ValidateStatus/styled';
-import { FormWrap, FormButton } from './styled';
-// interface IForm {
-//   id: number;
-//   name: string;
-//   image: string;
-//   species: string;
-//   description: string;
-//   country: string;
-// }
+import { v4 as uuidv4 } from 'uuid';
+import { FormWrap, FormButton, FormStatus } from './styled';
 
 interface IErrors {
   firstName?: boolean;
@@ -23,51 +16,94 @@ interface IErrors {
   drinks?: boolean;
   communic?: boolean;
   agree?: boolean;
+  firstTime?: boolean;
 }
 
-const Form: React.FC = () => {
+interface IFormProp {
+  setForms: React.Dispatch<React.SetStateAction<IForm[]>>;
+}
+
+const Form: React.FC<IFormProp> = ({ setForms }: IFormProp) => {
   const [firstName, setFirstName] = useState('');
-  const [secondName, setSecondName] = useState('');
   const [email, setEmail] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [country, setCountry] = useState('Russia');
   const [drinks, setDrinks] = useState<string[]>([]);
   const [communic, setCommunic] = useState('');
   const [agree, setAgree] = useState(false);
+  // const [errors, setErrors] = useState<IErrors>({ firstTime: true });
   const [errors, setErrors] = useState<IErrors>({});
-  const [wasSubmit, setWasSubmit] = useState(false);
+  const [empty, setEmpty] = useState(true);
+  const [formStatus, setFormStatus] = useState(false);
+
+  const resetForm = () => {
+    setFirstName('');
+    setEmail('');
+    setBirthDate('');
+    setCountry('Russia');
+    setDrinks([]);
+    setCommunic('');
+    setAgree(false);
+
+    setEmpty(true);
+  };
 
   const validate = () => {
     setErrors({});
+    let errs = 0;
     if (!agree) {
       setErrors(state => ({ ...state, agree: true }));
+      errs += 1;
     }
-    if (firstName === '') setErrors(state => ({ ...state, firstName: true }));
-    if (secondName === '') setErrors(state => ({ ...state, secondName: true }));
-    if (email === '') setErrors(state => ({ ...state, email: true }));
-    if (birthDate === '') setErrors(state => ({ ...state, birthDate: true }));
-    if (country === '') setErrors(state => ({ ...state, country: true }));
-    if (drinks.length === 0) setErrors(state => ({ ...state, drinks: true }));
-    if (communic === '') setErrors(state => ({ ...state, communic: true }));
+    if (firstName === '') {
+      setErrors(state => ({ ...state, firstName: true }));
+      errs += 1;
+    }
+    if (email === '') {
+      setErrors(state => ({ ...state, email: true }));
+      errs += 1;
+    }
+    if (birthDate === '') {
+      setErrors(state => ({ ...state, birthDate: true }));
+      errs += 1;
+    }
+    if (country === '') {
+      setErrors(state => ({ ...state, country: true }));
+      errs += 1;
+    }
+    if (drinks.length === 0) {
+      setErrors(state => ({ ...state, drinks: true }));
+      errs += 1;
+    }
+    if (communic === '') {
+      setErrors(state => ({ ...state, communic: true }));
+      errs += 1;
+    }
+
+    return !errs;
   };
 
   useEffect(() => {
-    if (wasSubmit) validate();
-  }, [agree, firstName, secondName, email, birthDate, country, drinks, communic, wasSubmit]);
+    if (!empty) {
+      validate();
+      setFormStatus(false);
+    } else setEmpty(false);
+  }, [agree, firstName, email, birthDate, country, drinks, communic]);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = event => {
     event.preventDefault();
-    validate();
-    setWasSubmit(true);
-    console.log('email: ', email);
-    console.log('birthDate: ', birthDate);
-    console.log('country: ', country);
-    console.log('drinks: ', drinks);
-    console.log('communic: ', communic);
-    console.log('agree: ', agree);
-    if (Object.keys(errors).length === 0) {
-      // if (!agree) 'Oh, come on. Agree, it will be fun';
-      // if (communic === '') alert('Choose communic method');
+    // setWasSubmit(true);
+    // validate();
+    if (validate()) {
+      // if (Object.keys(errors).length === 0) {
+
+      setForms(state => [
+        ...state,
+        { id: uuidv4(), firstName, email, birthDate, country, drinks, communic },
+      ]);
+      // setWasSubmit(false);
+      setFormStatus(true);
+      resetForm();
     }
   };
 
@@ -75,12 +111,6 @@ const Form: React.FC = () => {
     const updatedOptions = [...target.options].filter(option => option.selected).map(x => x.value);
     setDrinks(updatedOptions);
   };
-  // const year = dateOfBirth.getFullYear();
-  // const month =
-  //   dateOfBirth.getMonth() + 1 > 9
-  //     ? dateOfBirth.getMonth() + 1
-  //     : `0${dateOfBirth.getMonth() + 1}`;
-  // const date = dateOfBirth.getDate() > 9 ? dateOfBirth.getDate() : `0${dateOfBirth.getDate()}`;
 
   return (
     <FormWrap onSubmit={handleSubmit}>
@@ -92,14 +122,6 @@ const Form: React.FC = () => {
         onChange={e => setFirstName(e.target.value)}
       />
       {errors.firstName && <ValidateStatus>what should I call you my friend?</ValidateStatus>}
-      {/* <Input
-        inputName="secondName"
-        inputType="text"
-        label="Second Name"
-        value={secondName}
-        onChange={e => setSecondName(e.target.value)}
-      /> */}
-
       <Input
         inputName="email"
         inputType="email"
@@ -157,7 +179,7 @@ const Form: React.FC = () => {
         inputName="Rad1"
         label="Choose a communication method"
         choices={['EMail', 'Phone', 'Telegram', 'WhatsUp']}
-        value={communic}
+        // value={communic}
         onChange={e => {
           setCommunic(e.target.value);
         }}
@@ -165,13 +187,13 @@ const Form: React.FC = () => {
       {errors.communic && <ValidateStatus>how can i contact you?</ValidateStatus>}
       <InputCheckBox
         inputName="agree"
-        // inputType="checkbox"
         label="I agree to any madness"
         checked={agree}
         onChange={e => setAgree(e.target.checked)}
       />
       {errors.agree && <ValidateStatus>Oh, come on. Agree, it will be fun</ValidateStatus>}
       <FormButton>Submit</FormButton>
+      {formStatus && <FormStatus>New form created</FormStatus>}
     </FormWrap>
   );
 };

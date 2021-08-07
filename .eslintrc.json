@@ -24,7 +24,9 @@
   "rules": {
     "linebreak-style": "warn",
     "no-console": ["warn", { "allow": ["info", "error", "warn"] }],
-    "react-hooks/exhaustive-deps": "off"
+    "react-hooks/exhaustive-deps": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off"
   },
   "settings": {
     "react": {

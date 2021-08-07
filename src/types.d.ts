@@ -1,3 +1,17 @@
+interface IForms {
+  forms: IForm[];
+}
+
+interface IForm {
+  id: string;
+  firstName: string;
+  email: string;
+  birthDate: string;
+  country: string;
+  drinks: string[];
+  communic: string;
+}
+
 declare module '*.svg' {
   import React from 'react';
 
