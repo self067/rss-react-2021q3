@@ -3,14 +3,12 @@
   "plugins": ["@typescript-eslint", "react", "react-hooks", "eslint-plugin-import"],
   "env": {
     "browser": true,
-    "node": true,
     "es6": true
   },
   "extends": [
     "airbnb-typescript",
     "airbnb/hooks",
     "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "prettier"
   ],
   "parserOptions": {
@@ -24,9 +22,18 @@
   "rules": {
     "linebreak-style": "warn",
     "no-console": ["warn", { "allow": ["info", "error", "warn"] }],
-    "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/no-unsafe-call": "off",
-    "@typescript-eslint/no-unsafe-assignment": "off"
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "no-underscore-dangle": ["warn", { "allow": ["_bar"] }]
+    // "import/extensions": [
+    //   "warn",
+    //   {
+    //     "tsx": "never",
+    //     "ts": "never"
+    //   }
+    // ]
   },
   "settings": {
     "react": {

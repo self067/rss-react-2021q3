@@ -31,7 +31,6 @@ const Form: React.FC<IFormProp> = ({ setForms }: IFormProp) => {
   const [drinks, setDrinks] = useState<string[]>([]);
   const [communic, setCommunic] = useState('');
   const [agree, setAgree] = useState(false);
-  // const [errors, setErrors] = useState<IErrors>({ firstTime: true });
   const [errors, setErrors] = useState<IErrors>({});
   const [empty, setEmpty] = useState(true);
   const [formStatus, setFormStatus] = useState(false);

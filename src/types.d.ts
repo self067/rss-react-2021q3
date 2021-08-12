@@ -12,6 +12,34 @@ interface IForm {
   communic: string;
 }
 
+interface ISearchCards {
+  docs: ISearch[];
+  limit?: number;
+  offset?: number;
+  page?: number;
+  pages?: number;
+  total: number;
+}
+
+interface ISearch {
+  _id: string;
+  name: string;
+  birth: string;
+  death: string;
+  gender: string;
+  hair: string;
+  height: string;
+  race: string;
+  wikiUrl: string;
+}
+
+interface ISortOrder {
+  orderField: string;
+  orderDir: boolean;
+  setOrderField;
+  setOrderDir;
+}
+
 declare module '*.svg' {
   import React from 'react';
 

@@ -1,8 +1,5 @@
 {
   "compilerOptions": {
-    // "typeRoots": ["./node_modules/@types", "./typings"],
-    // "declaration": true,
-    // "declarationDir": "./types",
     "sourceMap": true,
     "noImplicitAny": false,
     "module": "commonjs",
@@ -22,7 +19,7 @@
       "assets/*": ["./src/assets/*"],
       "store/*": ["./src/store/*"]
     }
-    // "typeRoots": ["./src/@types", "./node_modules/@types"]
+
   },
   "include": ["src"]
 }

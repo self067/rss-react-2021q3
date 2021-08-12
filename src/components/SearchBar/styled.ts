@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import magnifier from 'assets/images/magnifier.svg';
 
 export const SearchWrap = styled.div`
-  /* background: url({ma}) no-repeat center; */
   padding: 5px 10px;
   display: inline-flex;
   justify-content: center;
