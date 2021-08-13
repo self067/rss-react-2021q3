@@ -24,7 +24,7 @@ const PagingPanel: React.FC<IPaging> = ({
       <InputNum
         inputName="limit"
         inputType="number"
-        label="Limit cards per page"
+        label="Cards per page"
         value={limit}
         max={100}
         onChange={e => {

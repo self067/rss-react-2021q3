@@ -14,7 +14,6 @@ const SearchResult: React.FC<ISearchCards> = ({
     {docs.map((f: ISearch) => (
       <FormCard key={f._id} id={f._id}>
         <FormItem> name: {f.name}</FormItem>
-        <FormItem> name: {f.name}</FormItem>
         <FormItem> birth: {f.birth}</FormItem>
         <FormItem> death: {f.death}</FormItem>
         <FormItem> gender: {f.gender}</FormItem>

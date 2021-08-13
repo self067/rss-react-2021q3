@@ -6,5 +6,8 @@ export const PagingWrapper = styled.div`
 `;
 
 export const PagingItem = styled.div`
+  display: flex;
+  justify-content: space-between;
   margin: 5px;
+  font-weight: bold;
 `;
