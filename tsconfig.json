@@ -1,8 +1,5 @@
 {
   "compilerOptions": {
-    // "typeRoots": ["./node_modules/@types", "./typings"],
-    // "declaration": true,
-    // "declarationDir": "./types",
     "sourceMap": true,
     "noImplicitAny": false,
     "module": "commonjs",
@@ -11,16 +8,18 @@
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
-    "allowJs": true,
-    "baseUrl": "./",
+    "allowJs": false,
+    "baseUrl": "src",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "moduleResolution": "node",
     "downlevelIteration": true,
     "paths": {
-      "components/*": ["./src/components/*"],
-      "assets/*": ["./src/assets"]
+      "components/*": ["components/*"],
+      "pages/*": ["pages/*"],
+      "assets/*": ["./src/assets/*"],
+      "store/*": ["./src/store/*"]
     }
   },
-  "include": ["src/**/*"]
+  "include": ["src"]
 }
