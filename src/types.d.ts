@@ -15,7 +15,6 @@ interface IForm {
 interface ISearchCards {
   docs: ISearch[];
   limit?: number;
-  offset?: number;
   page?: number;
   pages?: number;
   total: number;

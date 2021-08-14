@@ -9,17 +9,17 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
     "allowJs": false,
-    "baseUrl": "./",
+    "baseUrl": "src",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "moduleResolution": "node",
     "downlevelIteration": true,
     "paths": {
-      "components/*": ["./src/components/*"],
+      "components/*": ["components/*"],
+      "pages/*": ["pages/*"],
       "assets/*": ["./src/assets/*"],
       "store/*": ["./src/store/*"]
     }
-
   },
   "include": ["src"]
 }

@@ -34,6 +34,10 @@ const plugins = () => {
     new CopyWebpackPlugin({
       patterns: [
         {
+          from: path.resolve(__dirname, 'public/.htaccess'),
+          to: path.resolve(__dirname, 'dist'),
+        },
+        {
           from: path.resolve(__dirname, 'public/favicon.ico'),
           to: path.resolve(__dirname, 'dist'),
         },
@@ -61,12 +65,14 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[contenthash].js',
+    publicPath: '/',
   },
 
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js'],
     alias: {
       'components': path.resolve(__dirname, './src/components'),
+      'pages': path.resolve(__dirname, './src/pages'),
       'assets': path.resolve(__dirname, './src/assets'),
     },
   },
@@ -76,7 +82,10 @@ module.exports = {
     },
     minimizer: ['...', new CssMinimizerPlugin()],
   },
-
+  devServer: {
+    port: 8080,
+    historyApiFallback: true,
+  },
   devtool: 'source-map',
 
   plugins: plugins(),

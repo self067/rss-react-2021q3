@@ -1,25 +1,20 @@
 import React from 'react';
 
-import { FormsWrapper, FormCard, FormItem } from './styled';
+import { FormsWrapper, FormCard, FormItem, FormItemName, FormLink } from './styled';
 
-const SearchResult: React.FC<ISearchCards> = ({
-  docs = [],
-  limit = 0,
-  offset = 0,
-  page = 0,
-  pages = 0,
-  total = 0,
-}: ISearchCards) => (
+const SearchResult: React.FC<ISearchCards> = ({ docs = [] }: ISearchCards) => (
   <FormsWrapper>
     {docs.map((f: ISearch) => (
       <FormCard key={f._id} id={f._id}>
-        <FormItem> name: {f.name}</FormItem>
-        <FormItem> birth: {f.birth}</FormItem>
-        <FormItem> death: {f.death}</FormItem>
-        <FormItem> gender: {f.gender}</FormItem>
-        <FormItem> hair: {f.hair}</FormItem>
-        <FormItem> height: {f.height}</FormItem>
-        <FormItem> race: {f.race}</FormItem>
+        <FormLink to={`/details/${f._id}`}>
+          <FormItemName> name: {f.name}</FormItemName>
+          <FormItem> birth: {f.birth}</FormItem>
+          <FormItem> death: {f.death}</FormItem>
+          <FormItem> gender: {f.gender}</FormItem>
+          <FormItem> hair: {f.hair}</FormItem>
+          <FormItem> height: {f.height}</FormItem>
+          <FormItem> race: {f.race}</FormItem>
+        </FormLink>
         <FormItem>
           {f.wikiUrl ? (
             <a href={f.wikiUrl} target="blank">
