@@ -38,6 +38,10 @@ const plugins = () => {
           to: path.resolve(__dirname, 'dist'),
         },
         {
+          from: path.resolve(__dirname, 'public/_redirects'),
+          to: path.resolve(__dirname, 'dist'),
+        },
+        {
           from: path.resolve(__dirname, 'public/favicon.ico'),
           to: path.resolve(__dirname, 'dist'),
         },
@@ -74,6 +78,7 @@ module.exports = {
       'components': path.resolve(__dirname, './src/components'),
       'pages': path.resolve(__dirname, './src/pages'),
       'assets': path.resolve(__dirname, './src/assets'),
+      'store': path.resolve(__dirname, './src/store'),
     },
   },
   optimization: {
@@ -85,6 +90,8 @@ module.exports = {
   devServer: {
     port: 8080,
     historyApiFallback: true,
+    open: true,
+    host: 'localhost',
   },
   devtool: 'source-map',
 

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { H1, DetailsItem, DetailsCard, Loader } from './styled';
 
 const Details: React.FC = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState('');
   const [searchResults, setSearchResult] = useState<ISearchCards>({ docs: [], total: 0 });
