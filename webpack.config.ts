@@ -78,7 +78,9 @@ module.exports = {
       'components': path.resolve(__dirname, './src/components'),
       'pages': path.resolve(__dirname, './src/pages'),
       'assets': path.resolve(__dirname, './src/assets'),
-      'store': path.resolve(__dirname, './src/store'),
+      'store': path.resolve(__dirname, './src/redux/store'),
+      'actions': path.resolve(__dirname, './src/redux/actions'),
+      'reducers': path.resolve(__dirname, './src/redux/reducers'),
     },
   },
   optimization: {

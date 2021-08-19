@@ -1,5 +1,3 @@
-const initialState = {
-  orderDir: true,
-};
+const initialState = false;
 
 export default (state = initialState) => state;

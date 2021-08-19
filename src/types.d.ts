@@ -1,3 +1,20 @@
+interface ISearchAction {
+  type: string;
+  payload: {
+    searchCards: ISearchCards;
+  };
+}
+interface IApp {
+  searchResults: ISearch;
+  searchStringComplete: string;
+  orderField: string;
+  orderDir: boolean;
+  isLoading: boolean;
+  loadError: string;
+  limit: number;
+  page: number;
+}
+
 interface IForms {
   forms: IForm[];
 }

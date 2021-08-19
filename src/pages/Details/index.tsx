@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { H1, DetailsItem, DetailsCard, Loader } from './styled';
+import { setSearchResult } from '../../redux/reducers/searchResults';
 
 const Details: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState('');
-  const [searchResults, setSearchResult] = useState<ISearchCards>({ docs: [], total: 0 });
+
+  const searchResults = useSelector((state: RootStateOrAny) => state.searchResults);
+  const dispatch = useDispatch();
 
   const doSearch = (personId: string) => {
     console.log(personId);
@@ -21,10 +25,10 @@ const Details: React.FC = () => {
       .then(response => response.json())
       .then(
         data => {
-          console.log(data);
+          // console.log(data);
           setIsLoading(false);
           if ('total' in data && data.total > 0) {
-            setSearchResult(data);
+            dispatch(setSearchResult(data));
             setLoadError('');
           } else {
             setLoadError(data.message);
@@ -42,10 +46,6 @@ const Details: React.FC = () => {
   useEffect(() => {
     doSearch(id);
   }, [id]);
-
-  console.log('render Details', loadError, isLoading);
-
-  // const { name, birth, death, gender, hair, height, race, wikiUrl } = searchResults.docs[0];
 
   if (isLoading) return <Loader>Loading...</Loader>;
 

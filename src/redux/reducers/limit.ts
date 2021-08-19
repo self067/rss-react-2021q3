@@ -1,5 +1,3 @@
-const initialState = {
-  limit: 50,
-};
+const initialState = 50;
 
 export default (state = initialState) => state;

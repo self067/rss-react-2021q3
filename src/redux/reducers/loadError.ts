@@ -1,5 +1,3 @@
-const initialState = {
-  page: 1,
-};
+const initialState = '';
 
 export default (state = initialState) => state;

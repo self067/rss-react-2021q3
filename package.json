@@ -21,6 +21,7 @@
   "homepage": "https://github.com/self067/rss-react-2021q3#readme",
   "author": "self067",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.1",
     "normalize.css": "^8.0.1",
     "react": "^17.0.2",
     "react-animations": "^1.0.0",
@@ -29,6 +30,7 @@
     "react-router-dom": "^5.2.0",
     "redux": "^4.1.1",
     "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^5.3.0",
     "uuid": "^8.3.2"
   },

@@ -18,7 +18,9 @@
       "components/*": ["components/*"],
       "pages/*": ["pages/*"],
       "assets/*": ["./src/assets/*"],
-      "store/*": ["./src/store/*"]
+      "store/*": ["src/redux/store/*"],
+      "actions/*": ["src/redux/actions/*"],
+      "reducers/*": ["src/redux/reducers/*"]
     }
   },
   "include": ["src"]

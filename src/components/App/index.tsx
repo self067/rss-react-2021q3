@@ -10,17 +10,8 @@ import Details from 'pages/Details';
 import { NNav, StyledLink } from './styled';
 
 const activeStyle = { color: '#0508f3' };
-interface IApp {
-  searchResults: ISearch;
-  searchStringComplete: string;
-  orderField: string;
-  orderDir: boolean;
-  isLoading: boolean;
-  loadError: string;
-  limit: number;
-  page: number;
-}
-const App: React.FC<IApp> = (appStore: IApp) => (
+const App: React.FC = () => (
+  // const App: React.FC<IApp> = (appStore: IApp) => (
   <Router>
     {/* <Header /> */}
     <div>
@@ -34,7 +25,11 @@ const App: React.FC<IApp> = (appStore: IApp) => (
       </NNav>
 
       <Switch>
-        <Route path="/about">
+        <Route exact path="/about" component={About} />
+        <Route path="/details/:id" component={Details} />
+        <Route exact path="/" component={Home} />
+        <Route component={Page404} />
+        {/* <Route exact path="/about">
           <About />
         </Route>
         <Route path="/details/:id">
@@ -43,25 +38,26 @@ const App: React.FC<IApp> = (appStore: IApp) => (
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="*">
+        <Route>
           <Page404 />
-        </Route>
+        </Route> */}
       </Switch>
     </div>
   </Router>
 );
 
-const mapStateToProps = store => {
-  console.log(store);
-  return {
-    searchResults: store.searchResults,
-    searchStringComplete: store.searchStringComplete,
-    orderField: store.orderField,
-    orderDir: store.orderDir,
-    isLoading: store.isLoading,
-    loadError: store.loadError,
-    limit: store.limit,
-    page: store.page,
-  };
-};
-export default connect(mapStateToProps)(App);
+// const mapStateToProps = store => {
+//   console.log(store);
+//   return {
+//     searchResults: store.searchResults,
+//     searchStringComplete: store.searchStringComplete,
+//     orderField: store.orderField,
+//     orderDir: store.orderDir,
+//     isLoading: store.isLoading,
+//     loadError: store.loadError,
+//     limit: store.limit,
+//     page: store.page,
+//   };
+// };
+// export default connect(mapStateToProps)(App);
+export default App;

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
+
 import SearchBar from 'components/SearchBar/';
 import SearchResult from 'components/SearchResult';
 // import Cards from 'components/Cards';
@@ -6,18 +8,19 @@ import SearchResult from 'components/SearchResult';
 // import FormsBlock from 'components/FormsBlock';
 import SortPanel from 'components/SortPanel';
 import PagingPanel from 'components/PagingPanel';
-
+import { setSearchResult } from '../../redux/reducers/searchResults';
 import { Main, H1, Loader } from './styled';
 
 const Home: React.FC = () => {
-  const [searchResults, setSearchResult] = useState<ISearchCards>({ docs: [], total: 0 });
+  const searchResults = useSelector((state: RootStateOrAny) => state.searchResults);
+  const dispatch = useDispatch();
 
   const [searchStringComplete, setSearchStringComplete] = useState('');
+  const [loadError, setLoadError] = useState('');
+
   const [orderField, setOrderField] = useState<string>('');
   const [orderDir, setOrderDir] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [loadError, setLoadError] = useState('');
-
   const [limit, setPageLimit] = useState<number>(50);
   const [page, setPageNum] = useState<number>(1);
 
@@ -36,8 +39,7 @@ const Home: React.FC = () => {
       .then(response => response.json())
       .then(
         data => {
-          console.log(data);
-          setSearchResult(data);
+          dispatch(setSearchResult(data));
           setIsLoading(false);
         },
         error => {
@@ -52,8 +54,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     doSearch(searchStringComplete);
   }, [searchStringComplete, orderField, orderDir, limit, page]);
-  // }, [searchStringComplete, orderField, orderDir, limit, page]);
-  console.log('render');
+
   return (
     <Main>
       <H1>RSS React 2021Q3</H1>
