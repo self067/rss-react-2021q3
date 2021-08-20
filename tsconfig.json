@@ -23,5 +23,5 @@
       "reducers/*": ["src/redux/reducers/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "test/*"]
 }
