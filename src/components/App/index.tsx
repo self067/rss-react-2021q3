@@ -12,7 +12,7 @@ const activeStyle = { color: '#0508f3' };
 const App: React.FC = () => (
   <Router>
     {/* <Header /> */}
-    <div>
+    <div data-testid="app-router">
       <NNav>
         <StyledLink exact to="/" activeStyle={activeStyle}>
           Home

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import magnifier from 'assets/images/magnifier.svg';
+// import magnifier from 'assets/images/magnifier.svg';
 
 export const SearchWrap = styled.div`
   padding: 5px 10px;
@@ -23,7 +23,7 @@ export const SearchButton = styled.button`
   border-radius: 50%;
   border: none;
   background-color: transparent;
-  background: url(${magnifier}) no-repeat center;
+  /****  background: url($"{magnifier}) no-repeat center; ****/
   background-size: cover;
   transition: fill 0.25s;
   &:hover {

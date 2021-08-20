@@ -1,0 +1,29 @@
+{
+  "presets": ["@babel/preset-env", "@babel/preset-typescript", "@babel/preset-react"],
+  "plugins": [
+    [
+      "babel-plugin-module-resolver",
+      {
+        "root": ["./src"],
+        "alias": {
+          // "components/*": ["components/*"],
+          // "pages/*": ["pages/*"],
+          // "assets/*": ["./src/assets/*"],
+          // "store/*": ["src/redux/store/*"],
+          // "actions/*": ["src/redux/actions/*"],
+          // "reducers/*": ["src/redux/reducers/*"]
+          "components": "./src/components",
+          "pages": "./src/pages",
+          "assets": "./src/assets",
+          "store": "./src/redux/store",
+          "actions": "./src/redux/actions",
+          "reducers": "./src/redux/reducers"
+        }
+      }
+    ],
+
+    "@babel/proposal-class-properties",
+    "@babel/proposal-object-rest-spread",
+    "@babel/plugin-syntax-jsx"
+  ]
+}

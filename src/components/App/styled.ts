@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import inf from 'assets/images/infinity.svg';
+// import inf from 'assets/images/infinity.svg';
 import { NavLink } from 'react-router-dom';
 
 export const Main = styled.div`
@@ -16,7 +16,7 @@ export const H1 = styled.h1`
 export const Loader = styled.div`
   height: 200px;
   width: 200px;
-  background: url(${inf}) no-repeat center;
+  /* background: url($"{inf}) no-repeat center; */
   background-size: cover;
   text-align: center;
 `;

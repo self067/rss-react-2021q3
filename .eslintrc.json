@@ -12,7 +12,7 @@
     "prettier"
   ],
   "parserOptions": {
-    "project": ["tsconfig.json", "test/"],
+    "project": ["tsconfig.json", "test\\*.test.*", "jest.config.ts"],
     "ecmaVersion": 2020,
     "sourceType": "module",
     "ecmaFeatures": {
