@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /.cert
+/coverage
 
 # production
 /build
