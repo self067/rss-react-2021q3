@@ -1,10 +1,10 @@
 import React, { useState, useEffect, FormEventHandler } from 'react';
-import Input from 'components/Input';
-import InputRadio from 'components/InputRadio';
-import InputCheckBox from 'components/InputCheckBox';
-import InputSelect from 'components/InputSelect';
-import ValidateStatus from 'components/ValidateStatus/styled';
 import { v4 as uuidv4 } from 'uuid';
+import Input from '../Input';
+import InputRadio from '../InputRadio';
+import InputCheckBox from '../InputCheckBox';
+import InputSelect from '../InputSelect';
+import ValidateStatus from '../ValidateStatus/styled';
 import { FormWrap, FormButton, FormStatus } from './styled';
 
 interface IErrors {

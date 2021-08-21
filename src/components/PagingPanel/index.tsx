@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputNum } from 'components/Input';
+import { InputNum } from '../Input';
 import { PagingWrapper, PagingItem } from './styled';
 
 interface IPaging {

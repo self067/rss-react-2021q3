@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Form from 'components/Form';
-import FormList from 'components/FormList';
+import Form from '../Form';
+import FormList from '../FormList';
 
 const FormBlock: React.FC = () => {
   const [forms, setForms] = useState<IForm[]>([]);

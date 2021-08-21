@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">37.93% </span>
+                <span class="strong">96.55% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/29</span>
+                <span class='fraction'>28/29</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">37.93% </span>
+                <span class="strong">96.55% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/29</span>
+                <span class='fraction'>28/29</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -95,24 +95,24 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState } from 'react';
@@ -123,25 +123,25 @@ interface ISearchBar {
   doSearch: (searchString: string) =&gt; void;
 }
 &nbsp;
-const SearchBar: React.FC&lt;ISearchBar&gt; = <span class="fstat-no" title="function not covered" >({ doSearch }: ISearchBar) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const [searchString, setSearchString] = useState('');</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const handleSearchKey = s =&gt; {</span>
+const SearchBar: React.FC&lt;ISearchBar&gt; = ({ doSearch }: ISearchBar) =&gt; {
+  const [searchString, setSearchString] = useState('');
+&nbsp;
+  const handleSearchKey = <span class="fstat-no" title="function not covered" >s =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    if (s.key === 'Enter') doSearch(searchString);</span>
-<span class="cstat-no" title="statement not covered" >  };</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;SearchWrap&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;SearchInput</span>
-<span class="cstat-no" title="statement not covered" >        value={searchString}</span>
-<span class="cstat-no" title="statement not covered" >        placeholder="Search"</span>
-<span class="cstat-no" title="statement not covered" >        onChange={e =&gt; setSearchString(e.target.value)}</span>
-<span class="cstat-no" title="statement not covered" >        onKeyPress={e =&gt; handleSearchKey(e)}</span>
-<span class="cstat-no" title="statement not covered" >      /&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;SearchButton onClick={() =&gt; doSearch(searchString)} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >    &lt;/SearchWrap&gt;</span>
-<span class="cstat-no" title="statement not covered" >  );</span>
-<span class="cstat-no" title="statement not covered" >};</span>
+  };
+&nbsp;
+  return (
+    &lt;SearchWrap&gt;
+      &lt;SearchInput
+        value={searchString}
+        placeholder="Search"
+        onChange={<span class="fstat-no" title="function not covered" >e =&gt; setSearchString(</span>e.target.value)}
+        onKeyPress={<span class="fstat-no" title="function not covered" >e =&gt; handleSearchKey(</span>e)}
+      /&gt;
+      &lt;SearchButton onClick={<span class="fstat-no" title="function not covered" >() =&gt; doSearch(</span>searchString)} /&gt;
+    &lt;/SearchWrap&gt;
+  );
+};
 &nbsp;
 export default SearchBar;
 &nbsp;</pre></td></tr></table></pre>
@@ -151,7 +151,7 @@ export default SearchBar;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Aug 21 2021 00:04:15 GMT+0300 (Москва, стандартное время)
+                at Sat Aug 21 2021 16:49:24 GMT+0300 (Москва, стандартное время)
             </div>
         </div>
         <script src="../../prettify.js"></script>

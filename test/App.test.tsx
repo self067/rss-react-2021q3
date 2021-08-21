@@ -1,10 +1,13 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { act } from 'react-dom/test-utils';
+import fetch from 'node-fetch';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { createMemoryHistory } from 'history';
+// import userEvent from '@testing-library/user-event';
+// import { createMemoryHistory } from 'history';
+// import { Router } from 'react-router-dom';
 
-import { Router } from 'react-router-dom';
+import store from '../src/redux/store';
 
 import '@testing-library/jest-dom';
 
@@ -25,10 +28,14 @@ afterEach(() => {
 
 it('react', () => {
   act(() => {
-    let el = render(App());
-    console.log(el);
+    let el = render(
+      <Provider store={store}>
+        <App />
+      </Provider>
+    );
+    // console.log(el);
     let inn = el.getByTestId('app-router');
-    console.log(inn);
+    // console.log('inn=', inn);
     expect(inn.textContent).toBe('qwe');
   });
 });

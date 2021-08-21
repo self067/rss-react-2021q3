@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
+import fetch from 'node-fetch';
 
-import SearchBar from 'components/SearchBar/';
-import SearchResult from 'components/SearchResult';
+import SearchBar from '../../components/SearchBar';
+import SearchResult from '../../components/SearchResult';
 // import Cards from 'components/Cards';
 // import data from 'assets/animals.json';
 // import FormsBlock from 'components/FormsBlock';
-import SortPanel from 'components/SortPanel';
-import PagingPanel from 'components/PagingPanel';
+import SortPanel from '../../components/SortPanel';
+import PagingPanel from '../../components/PagingPanel';
 import { setSearchResult } from '../../redux/reducers/searchResults';
 import { Main, H1, Loader } from './styled';
 
 const Home: React.FC = () => {
-  const searchResults = useSelector((state: RootStateOrAny) => state.searchResults);
   const dispatch = useDispatch();
+  const searchResults = useSelector((state: RootStateOrAny) => state.searchResults);
 
   const [searchStringComplete, setSearchStringComplete] = useState('');
   const [loadError, setLoadError] = useState('');
