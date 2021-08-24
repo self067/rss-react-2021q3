@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
-import fetch from 'node-fetch';
+import axios from 'axios';
 
 import SearchBar from '../../components/SearchBar';
 import SearchResult from '../../components/SearchResult';
-// import Cards from 'components/Cards';
-// import data from 'assets/animals.json';
-// import FormsBlock from 'components/FormsBlock';
 import SortPanel from '../../components/SortPanel';
 import PagingPanel from '../../components/PagingPanel';
 import { setSearchResult } from '../../redux/reducers/searchResults';
@@ -36,15 +33,19 @@ const Home: React.FC = () => {
     if (orderField !== 'unsorted' && orderField !== '')
       s += `${s ? '&' : '?'}sort=${orderField}:${orderDir ? 'asc' : 'desc'}`;
     s += `${s ? '&' : '?'}limit=${limit}&page=${page}`;
-    fetch(`https://the-one-api.dev/v2/character${s}`, { headers })
-      .then(response => response.json())
+    axios
+      .get(`https://the-one-api.dev/v2/character${s}`, { headers })
+      // fetch(`https://the-one-api.dev/v2/character${s}`, { headers })
+
+      // .then(response => response.json())
       .then(
         data => {
-          dispatch(setSearchResult(data));
+          console.log(data);
+          dispatch(setSearchResult(data.data));
           setIsLoading(false);
         },
         error => {
-          console.log(error);
+          // console.log(error);
           setIsLoading(false);
           setLoadError(error);
         }
@@ -75,9 +76,9 @@ const Home: React.FC = () => {
         total={searchResults.total}
       />
 
-      {isLoading && <Loader>Loading...</Loader>}
-
-      {loadError ? (
+      {isLoading ? (
+        <Loader>Loading...</Loader>
+      ) : loadError ? (
         <div>{loadError}</div>
       ) : (
         <SearchResult

@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
-// import inf from 'assets/images/infinity.svg';
 import { slideInDown, slideInUp, slideInRight, slideInLeft } from 'react-animations';
+import inf from 'assets/images/infinity.svg';
 
 export const Main = styled.div`
   animation: 2s ${keyframes`${slideInUp}`};
@@ -16,9 +16,13 @@ export const H1 = styled.h1`
 `;
 
 export const Loader = styled.div`
+  padding-top: 20px;
   height: 200px;
   width: 200px;
-  /* background: url($"{inf}) no-repeat center; */
+  font-size: 20px;
+  font-weight: bold;
+  color: green;
+  background: url(${inf}) no-repeat center;
   background-size: cover;
   text-align: center;
 `;

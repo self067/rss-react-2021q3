@@ -1,10 +1,12 @@
 import styled, { keyframes } from 'styled-components';
 import { slideInDown, slideInUp, slideInRight, slideInLeft } from 'react-animations';
+import inf from 'assets/images/infinity.svg';
 
 /// /* animation: 2s ${keyframes`${slideInUp}`}; */
 /// // /* animation: 1s ${keyframes`${slideInDown}`}; */
 
 export const DetailsCard = styled.div`
+  animation: 1s ${keyframes`${slideInUp}`};
   padding: 50px;
   display: flex;
   flex-direction: column;
@@ -26,5 +28,10 @@ export const Loader = styled.div`
   padding: 50px;
   height: 200px;
   width: 200px;
+  font-size: 20px;
+  font-weight: bold;
+  color: green;
+  background: url(${inf}) no-repeat center;
+  background-size: cover;
   text-align: center;
 `;
