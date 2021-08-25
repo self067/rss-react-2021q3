@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
-// import fetch from 'node-fetch';
+import axios from 'axios';
 
 import SearchBar from '../../components/SearchBar';
 import SearchResult from '../../components/SearchResult';
@@ -33,11 +33,15 @@ const Home: React.FC = () => {
     if (orderField !== 'unsorted' && orderField !== '')
       s += `${s ? '&' : '?'}sort=${orderField}:${orderDir ? 'asc' : 'desc'}`;
     s += `${s ? '&' : '?'}limit=${limit}&page=${page}`;
-    fetch(`https://the-one-api.dev/v2/character${s}`, { headers })
-      .then(response => response.json())
+    axios
+      .get(`https://the-one-api.dev/v2/character${s}`, { headers })
+      // fetch(`https://the-one-api.dev/v2/character${s}`, { headers })
+
+      // .then(response => response.json())
       .then(
         data => {
-          dispatch(setSearchResult(data));
+          console.log(data);
+          dispatch(setSearchResult(data.data));
           setIsLoading(false);
         },
         error => {

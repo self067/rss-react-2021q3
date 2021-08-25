@@ -6,7 +6,7 @@
 
 export default {
   // All imported modules in your tests should be mocked automatically
-  automock: true,
+  // automock: true,
 
   // Stop running tests after `n` failures
   // bail: 0,
@@ -67,10 +67,8 @@ export default {
   // maxWorkers: "50%",
 
   // An array of directory names to be searched recursively up from the requiring module's location
-  // moduleDirectories: [
-  //   "node_modules"
-  // ],
-
+  moduleDirectories: ['src', 'node_modules'],
+  modulePaths: ['<rootDir>/src/'],
   // An array of file extensions your modules use
   // moduleFileExtensions: [
   //   "js",
@@ -122,9 +120,7 @@ export default {
   // rootDir: undefined,
 
   // A list of paths to directories that Jest should use to search for files in
-  // roots: [
-  //   "<rootDir>"
-  // ],
+  // roots: ['<rootDir>', 'src', 'tests', '<rootDir>/src/', '<rootDir>/tests/'],
 
   // Allows you to use a custom runner instead of Jest's default test runner
   // runner: "jest-runner",
