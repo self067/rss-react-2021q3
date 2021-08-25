@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
 
 import SearchBar from '../../components/SearchBar';
 import SearchResult from '../../components/SearchResult';
-// import Cards from 'components/Cards';
-// import data from 'assets/animals.json';
-// import FormsBlock from 'components/FormsBlock';
 import SortPanel from '../../components/SortPanel';
 import PagingPanel from '../../components/PagingPanel';
 import { setSearchResult } from '../../redux/reducers/searchResults';
@@ -44,7 +41,7 @@ const Home: React.FC = () => {
           setIsLoading(false);
         },
         error => {
-          console.log(error);
+          // console.log(error);
           setIsLoading(false);
           setLoadError(error);
         }
@@ -75,9 +72,9 @@ const Home: React.FC = () => {
         total={searchResults.total}
       />
 
-      {isLoading && <Loader>Loading...</Loader>}
-
-      {loadError ? (
+      {isLoading ? (
+        <Loader>Loading...</Loader>
+      ) : loadError ? (
         <div>{loadError}</div>
       ) : (
         <SearchResult

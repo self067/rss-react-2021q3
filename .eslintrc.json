@@ -26,14 +26,8 @@
     "@typescript-eslint/no-unsafe-assignment": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "no-underscore-dangle": ["warn", { "allow": ["_bar"] }]
-    // "import/extensions": [
-    //   "warn",
-    //   {
-    //     "tsx": "never",
-    //     "ts": "never"
-    //   }
-    // ]
+    "no-underscore-dangle": ["warn", { "allow": ["_bar"] }],
+    "no-nested-ternary": "off"
   },
   "settings": {
     "react": {

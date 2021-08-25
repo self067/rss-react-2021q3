@@ -13,7 +13,6 @@ const Details: React.FC = () => {
   const dispatch = useDispatch();
 
   const doSearch = (personId: string) => {
-    console.log(personId);
     setIsLoading(true);
     setLoadError('');
     const headers = {

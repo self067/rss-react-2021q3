@@ -6,7 +6,7 @@
 
 export default {
   // All imported modules in your tests should be mocked automatically
-  // automock: false,
+  automock: true,
 
   // Stop running tests after `n` failures
   // bail: 0,
@@ -15,10 +15,10 @@ export default {
   // cacheDirectory: "C:\\Users\\sel\\AppData\\Local\\Temp\\jest",
 
   // Automatically clear mock calls and instances between every test
-  // clearMocks: false,
+  clearMocks: true,
 
   // Indicates whether the coverage information should be collected while executing the test
-  collectCoverage: true,
+  // collectCoverage: true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   // collectCoverageFrom: undefined,
@@ -83,7 +83,11 @@ export default {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   // moduleNameMapper: {},
-
+  'moduleNameMapper': {
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/mocks/fileMock.ts',
+    '\\.(css|less)$': '<rootDir>/mocks/styleMock.ts',
+  },
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
 
@@ -94,7 +98,7 @@ export default {
   // notifyMode: "failure-change",
 
   // A preset that is used as a base for Jest's configuration
- preset: 'ts-jest',
+  preset: 'ts-jest',
 
   // Run tests from one or more projects
   // projects: undefined,
