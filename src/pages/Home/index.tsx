@@ -35,12 +35,9 @@ const Home: React.FC = () => {
     s += `${s ? '&' : '?'}limit=${limit}&page=${page}`;
     axios
       .get(`https://the-one-api.dev/v2/character${s}`, { headers })
-      // fetch(`https://the-one-api.dev/v2/character${s}`, { headers })
-
-      // .then(response => response.json())
       .then(
         data => {
-          console.log(data);
+          // console.log(data);
           dispatch(setSearchResult(data.data));
           setIsLoading(false);
         },

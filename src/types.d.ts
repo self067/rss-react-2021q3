@@ -4,16 +4,16 @@ interface ISearchAction {
     searchCards: ISearchCards;
   };
 }
-interface IApp {
-  searchResults: ISearch;
-  searchStringComplete: string;
-  orderField: string;
-  orderDir: boolean;
-  isLoading: boolean;
-  loadError: string;
-  limit: number;
-  page: number;
-}
+// interface IApp {
+//   searchResults: ISearch;
+//   searchStringComplete: string;
+//   orderField: string;
+//   orderDir: boolean;
+//   isLoading: boolean;
+//   loadError: string;
+//   limit: number;
+//   page: number;
+// }
 
 interface IForms {
   forms: IForm[];
@@ -26,7 +26,7 @@ interface IForm {
   birthDate: string;
   country: string;
   drinks: string[];
-  communic: string;
+  communicate: string;
 }
 
 interface ISearchCards {
@@ -57,10 +57,9 @@ interface ISortOrder {
 }
 
 declare module '*.svg' {
-  import React from 'react';
+  // import React from 'react';
 
-  export const Svg: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
-
+  // export const Svg: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
   const src: string;
   export default src;
 }

@@ -21,7 +21,7 @@ interface IInputNum extends IInputSh {
 const Input: React.FC<IInput> = ({ inputName, inputType, label, value, onChange }: IInput) => (
   <ItemLabel htmlFor={inputName}>
     <ItemP>{label}</ItemP>
-    <ItemInput type={inputType} value={value} onChange={onChange} />
+    <ItemInput id={inputName} type={inputType} value={value} onChange={onChange} />
   </ItemLabel>
 );
 
@@ -35,7 +35,14 @@ export const InputNum: React.FC<IInputNum> = ({
 }: IInputNum) => (
   <ItemLabel htmlFor={inputName}>
     <ItemP>{label}</ItemP>
-    <ItemInput type={inputType} value={value} onChange={onChange} max={max} min={1} />
+    <ItemInput
+      id={inputName}
+      type={inputType}
+      value={value}
+      onChange={onChange}
+      max={max}
+      min={1}
+    />
   </ItemLabel>
 );
 
