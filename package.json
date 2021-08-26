@@ -14,7 +14,7 @@
     "dev": "eslint src/*.ts* && cross-env NODE_ENV=development webpack --mode development --progress --stats-error-details --stats-children",
     "build": "eslint src/*.ts* && cross-env NODE_ENV=production webpack --mode production --progress",
     "lint": "eslint --fix . --ext .ts,.tsx src",
-    "test": "jest --detectOpenHandles ",
+    "test": "jest  --detectOpenHandles ",
     "test:coverage": "jest --coverage"
   },
   "bugs": {
