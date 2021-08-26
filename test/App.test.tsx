@@ -184,6 +184,7 @@ describe('hooks test', () => {
 // });
 
 // test('full app rendering/navigating', () => {
+
 //   render(<App />);
 //   // verify page content for expected route
 //   // often you'd use a data-testid or role query, but this is also possible
