@@ -98,7 +98,7 @@ const Form: React.FC<IFormProp> = ({ setForms }: IFormProp) => {
 
       setForms(state => [
         ...state,
-        { id: uuidv4(), firstName, email, birthDate, country, drinks, communic },
+        { id: uuidv4(), firstName, email, birthDate, country, drinks, communicate: communic },
       ]);
       // setWasSubmit(false);
       setFormStatus(true);
