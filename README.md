@@ -21,3 +21,7 @@ https://www.google.com/search?q=react+Jest+%D0%BA%D0%B0%D0%BA+%D1%82%D0%B5%D1%81
 !!!
 https://www.youtube.com/watch?v=aUgcf6p1Ep4&
 list=PLNkWIWHIRwMEsMUc0B-lYb7DTLroWlKLK&ab_channel=webDev
+!!!
+https://testing-library.com/docs/react-testing-library/cheatsheet/
+https://testing-library.com/docs/dom-testing-library/api-debugging/
+https://testing-library.com/docs/queries/about/
