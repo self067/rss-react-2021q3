@@ -1,7 +1,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-// import '@testing-library/jest-dom';
+import ReactRouter from 'react-router';
+
 import '@testing-library/jest-dom/extend-expect';
 import { render, fireEvent, screen, getByText } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -170,11 +171,24 @@ describe('events', () => {
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 describe('Details page test', () => {
   test('Details test', async () => {
-    render(<Details />);
+    jest.spyOn(ReactRouter, 'useParams').mockReturnValue({ id: '5cd99d4bde30eff6ebccfbec' });
+    render(
+      <Provider store={store}>
+        <Details />
+      </Provider>
+    );
     expect(await screen.findByText(/Person/)).toBeInTheDocument();
   });
 
-  screen.debug();
+  test('Details without wiki link test', async () => {
+    jest.spyOn(ReactRouter, 'useParams').mockReturnValue({ id: '5cdbdecb6dc0baeae48cfac8' });
+    render(
+      <Provider store={store}>
+        <Details />
+      </Provider>
+    );
+    expect(await screen.findByText(/Person/)).toBeInTheDocument();
+  });
 });
 
 ////######################################################################
@@ -182,37 +196,6 @@ describe('Details page test', () => {
 ////######################################################################
 
 // ??@@??@@??@@??@@??@@??????????????????????????
-// describe('hooks test', () => {
-//   const onChange = jest.fn();
-//   let value = 'qaz';
-//   const wrapper = render(
-//     <Input inputName="firstName" inputType="text" label="Name" value={value} onChange={onChange} />
-//   );
-//   // logRoles(wrapper);
-//   // screen.debug();
-//   let items = screen.getAllByRole('textbox');
-
-//   test('search input', () => {
-//     expect(items).toHaveLength(1);
-//   });
-
-//   test('inputs test', () => {
-//     wrapper.debug();
-//     expect(getByLabelText(wrapper.container, /Name/i)).toBeInTheDocument();
-//   });
-
-//   // test('inputs test2', () => {
-//   //   expect(wrapper.getByRole('input')).not.toBeNull();
-//   // });
-
-//   // fireEvent.change(screen.getByRole('spinbutton'), {
-//   //   target: { value: '444' },
-//   // });
-
-//   // fireEvent.change(wrapper.getByRole('textbox'), {
-//   //   target: { value: '477' },
-//   // });
-// });
 
 // expect(container.querySelector("[data-testid='email']").getAttribute('href')).toEqual(
 //   'mailto:test@example.com'
