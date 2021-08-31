@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { slideInDown, slideInUp, slideInRight, slideInLeft } from 'react-animations';
+import { slideInDown, slideInUp } from 'react-animations';
 import inf from 'assets/images/infinity.svg';
 
 export const Main = styled.div`
