@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
+import axios from 'axios';
+
 import { H1, DetailsItem, DetailsCard, Loader } from './styled';
 import { setSearchResult } from '../../redux/reducers/searchResults';
 
@@ -20,17 +22,16 @@ const Details: React.FC = () => {
       'Authorization': 'Bearer KMuQ0BrRt4TNpMmuR4Nz',
     };
 
-    fetch(`https://the-one-api.dev/v2/character/${personId}`, { headers })
-      .then(response => response.json())
+    axios
+      .get(`https://the-one-api.dev/v2/character/${personId}`, { headers })
       .then(
         data => {
-          // console.log(data);
           setIsLoading(false);
-          if ('total' in data && data.total > 0) {
-            dispatch(setSearchResult(data));
+          if ('total' in data.data && data.data.total > 0) {
+            dispatch(setSearchResult(data.data));
             setLoadError('');
           } else {
-            setLoadError(data.message);
+            setLoadError(data.data.message);
           }
         },
         error => {
