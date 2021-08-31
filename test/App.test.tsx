@@ -15,6 +15,7 @@ import App from '../src/components/App'; //components/App';
 import Input from '../src/components/Input';
 import PagingPanel from '../src/components/PagingPanel';
 import SearchBar from '../src/components/SearchBar';
+import Details from '../src/pages/Details';
 
 describe('Common App tests', () => {
   test('App H1', () => {
@@ -60,9 +61,6 @@ describe('Paging test', () => {
     total = 777;
 
   const paging = render(
-    // <Provider store={store}>
-    //   <App />
-    // </Provider>
     <PagingPanel
       limit={limit}
       setPageLimit={setPageLimit}
@@ -109,27 +107,20 @@ describe('Input component test', () => {
   );
   //   // logRoles(wrapper);
   let items = screen.getAllByRole('textbox');
-  screen.debug();
 
   test('search input', () => {
     expect(items).toHaveLength(1);
   });
 
   test('inputs test', () => {
-    expect(wrapper.getByLabelText(/Name/i)).toBeInTheDocument();
+    expect(screen.queryByText(/Search/)).toBeNull();
   });
 
-  test('inputs test2', () => {
-    expect(screen.getAllByRole('textbox')).not.toHaveLength(0);
+  test('inputs test2', async () => {
+    const setSearchStringComplete = jest.fn();
+    render(<SearchBar doSearch={setSearchStringComplete} />);
+    expect(await screen.findByPlaceholderText(/Search/gi)).toBeInTheDocument();
   });
-
-  //   // fireEvent.change(screen.getByRole('spinbutton'), {
-  //   //   target: { value: '444' },
-  //   // });
-
-  //   // fireEvent.change(wrapper.getByRole('textbox'), {
-  //   //   target: { value: '477' },
-  //   // });
 });
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -140,51 +131,55 @@ describe('SearchBar test', () => {
   const ren = render(<SearchBar doSearch={setSearchStringComplete} />);
   userEvent.keyboard('Gendalf');
 
-  test('SearchBar test2', () => {
-    expect(screen.getAllByText(/Gendalf/)).not.toHaveLength(0);
+  test('SearchBar test2', async () => {
+    render(<SearchBar doSearch={setSearchStringComplete} />);
+
+    fireEvent.change(await screen.findByPlaceholderText(/Search/gi), {
+      target: { value: 'Gendalf' },
+    });
+
+    expect(await screen.findByDisplayValue(/Gendalf/)).toBeInTheDocument();
   });
 });
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+describe('events', () => {
+  it('checkbox click', () => {
+    const handleChange = jest.fn();
+    const { container } = render(<input type="checkbox" onChange={handleChange} />);
+    const checkbox = container.firstChild;
+    expect(checkbox).not.toBeChecked();
+    fireEvent.click(checkbox);
+    expect(handleChange).toHaveBeenCalledTimes(1);
+    expect(checkbox).toBeChecked();
+  });
 
-// it('get inputs ', () => {
-//   expect(paging).toContain(items[0]);
-//   console.log('items:', items);
+  it('input focus', () => {
+    const { getByTestId } = render(<input type="text" data-testid="simple-input" />);
+    const input = getByTestId('simple-input');
+    expect(input).not.toHaveFocus();
+    input.focus();
+    expect(input).toHaveFocus();
+  });
+});
 
-//   ///@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//   // expect(await paging.getByRole('').toBeInTheDocument();
-//   //  700 cards in 33 pages'
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+describe('Details page test', () => {
+  test('Details test', async () => {
+    render(<Details />);
+    expect(await screen.findByText(/Person/)).toBeInTheDocument();
+  });
 
-//   // paging.debug();
-// });
-// screen.debug();
+  screen.debug();
+});
 
-////####################################################################################
-////####################################################################################
-////####################################################################################
-// <SearchBar doSearch={setSearchStringComplete} />
-// <SortPanel
-//   orderField={orderField}
-//   orderDir={orderDir}
-//   setOrderField={setOrderField}
-//   setOrderDir={setOrderDir}
-// />
-// <PagingPanel
-//   limit={limit}
-//   setPageLimit={setPageLimit}
-//   page={page}
-//   setPageNum={setPageNum}
-//   pages={searchResults.pages}
-//   total={searchResults.total}
-// />
-
-//   it('get label', () => {
-//     expect(screen.getByLabelText(/Select order field/i)).toBeInTheDocument();
-//   });
-
-//""""""""""""""""""""""""@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+////######################################################################
+////######################################################################
+////######################################################################
 
 // ??@@??@@??@@??@@??@@??????????????????????????
 // describe('hooks test', () => {
