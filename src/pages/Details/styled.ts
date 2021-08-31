@@ -1,9 +1,6 @@
 import styled, { keyframes } from 'styled-components';
-import { slideInDown, slideInUp, slideInRight, slideInLeft } from 'react-animations';
+import { slideInUp } from 'react-animations';
 import inf from 'assets/images/infinity.svg';
-
-/// /* animation: 2s ${keyframes`${slideInUp}`}; */
-/// // /* animation: 1s ${keyframes`${slideInDown}`}; */
 
 export const DetailsCard = styled.div`
   animation: 1s ${keyframes`${slideInUp}`};
