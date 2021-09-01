@@ -2,3 +2,5 @@ webpack.config.ts
 .eslintrc.* 
 /dist
 /node_modules
+jest.config.ts
+/test

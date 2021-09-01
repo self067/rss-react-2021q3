@@ -1,0 +1,96 @@
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
+import axios from 'axios';
+
+import SearchBar from '../../components/SearchBar';
+import SearchResult from '../../components/SearchResult';
+import SortPanel from '../../components/SortPanel';
+import PagingPanel from '../../components/PagingPanel';
+import { setSearchResult } from '../../redux/reducers/searchResults';
+import { Main, H1, Loader } from './styled';
+
+const Home: React.FC = () => {
+  const dispatch = useDispatch();
+  const searchResults = useSelector((state: RootStateOrAny) => state.searchResults);
+
+  const [searchStringComplete, setSearchStringComplete] = useState('');
+  const [loadError, setLoadError] = useState('');
+
+  const [orderField, setOrderField] = useState<string>('');
+  const [orderDir, setOrderDir] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [limit, setPageLimit] = useState<number>(50);
+  const [page, setPageNum] = useState<number>(1);
+
+  const doSearch = (searchStringD: string) => {
+    setIsLoading(true);
+    setLoadError('');
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer KMuQ0BrRt4TNpMmuR4Nz',
+    };
+    let s = searchStringD ? `?name=/${searchStringD}/i` : '';
+    if (orderField !== 'unsorted' && orderField !== '')
+      s += `${s ? '&' : '?'}sort=${orderField}:${orderDir ? 'asc' : 'desc'}`;
+    s += `${s ? '&' : '?'}limit=${limit}&page=${page}`;
+    axios
+      .get(`https://the-one-api.dev/v2/character${s}`, { headers })
+      .then(
+        data => {
+          // console.log(data);
+          dispatch(setSearchResult(data.data));
+          setIsLoading(false);
+        },
+        error => {
+          // console.log(error);
+          setIsLoading(false);
+          setLoadError(error);
+        }
+      )
+      .catch(err => setLoadError(err));
+  };
+
+  useEffect(() => {
+    doSearch(searchStringComplete);
+  }, [searchStringComplete, orderField, orderDir, limit, page]);
+
+  return (
+    <Main>
+      <H1>RSS React 2021Q3</H1>
+      <SearchBar doSearch={setSearchStringComplete} />
+      <SortPanel
+        orderField={orderField}
+        orderDir={orderDir}
+        setOrderField={setOrderField}
+        setOrderDir={setOrderDir}
+      />
+      <PagingPanel
+        limit={limit}
+        setPageLimit={setPageLimit}
+        page={page}
+        setPageNum={setPageNum}
+        pages={searchResults.pages}
+        total={searchResults.total}
+      />
+
+      {isLoading ? (
+        <Loader>Loading...</Loader>
+      ) : loadError ? (
+        <div>{loadError}</div>
+      ) : (
+        <SearchResult
+          docs={searchResults.docs}
+          limit={searchResults.limit}
+          page={searchResults.page}
+          pages={searchResults.pages}
+          total={searchResults.total}
+        />
+      )}
+
+      {/* <Cards data={data} /> */}
+      {/* <FormsBlock /> */}
+    </Main>
+  );
+};
+
+export default Home;
