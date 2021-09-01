@@ -177,7 +177,7 @@ describe('Details page test', () => {
         <Details />
       </Provider>
     );
-    expect(await screen.findByText(/Person/)).toBeInTheDocument();
+    expect(await screen.findByText(/(Person)|(Loading)/)).toBeInTheDocument();
   });
 
   test('Details without wiki link test', async () => {
