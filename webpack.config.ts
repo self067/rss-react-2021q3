@@ -31,17 +31,6 @@ const babelOptions = preset => {
   return opts;
 };
 
-// const jsLoaders = () => {
-//   const loaders = {
-//     loader: ["babel-loader"],
-//     options: babelOptions()
-//   };
-//   if( isDev) {
-//     loaders.loader.push('eslint-loader');
-//   }
-//   return loaders;
-// }
-
 const plugins = () => {
   const base = [
     new HTMLWebpackPlugin({
@@ -54,6 +43,10 @@ const plugins = () => {
         {
           from: path.resolve(__dirname, 'public/favicon.ico'),
           to: path.resolve(__dirname, 'dist'),
+        },
+        {
+          from: path.resolve(__dirname, 'public/images/'),
+          to: path.resolve(__dirname, 'dist/public/images'),
         },
       ],
     }),
