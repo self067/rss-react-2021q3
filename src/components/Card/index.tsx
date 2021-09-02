@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { CardWrap, CardImage, CardDescription, CardInfo } from './styled';
 
 interface ICard {
-  id: number;
   name: string;
   image: string;
   species: string;
@@ -10,17 +9,16 @@ interface ICard {
   country: string;
 }
 
-const Card: FC = ({ item }) => {
-  const { id, description, image, species, name, country }: ICard = item;
-  const im = `public/images/${image}`;
+const Card: FC<ICard> = ({ description, image, species, name, country }: ICard) => {
+  const imageSource = `public/images/${image}`;
   return (
     <CardWrap>
-      <CardImage src={im} alt={image} />{' '}
+      <CardImage src={imageSource} alt={image} />{' '}
       <CardInfo>
-        <div>
+        <p>
           {name} - {species}
-        </div>
-        <div>Country: {country}</div>
+        </p>
+        <p>Country: {country}</p>
       </CardInfo>
       <CardDescription>{description}</CardDescription>
     </CardWrap>

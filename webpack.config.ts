@@ -31,17 +31,6 @@ const babelOptions = preset => {
   return opts;
 };
 
-// const jsLoaders = () => {
-//   const loaders = {
-//     loader: ["babel-loader"],
-//     options: babelOptions()
-//   };
-//   if( isDev) {
-//     loaders.loader.push('eslint-loader');
-//   }
-//   return loaders;
-// }
-
 const plugins = () => {
   const base = [
     new HTMLWebpackPlugin({
